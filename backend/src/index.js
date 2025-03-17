@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "https://text-sharing-nine.vercel.app", // Replace with your Vercel frontend URL
+    origin: [process.env.FRONTEND_URL,"https://text-sharing-nine.vercel.app"], // Replace with your Vercel frontend URL
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true, // Allow cookies & auth headers
   })
