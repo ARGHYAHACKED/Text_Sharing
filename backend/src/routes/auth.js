@@ -9,9 +9,11 @@ const router = express.Router();
 router.post('/register', async (req, res) => {
   try {
     const { email, password } = req.body;
-    let user = await User.findOne({ email });
+    console.log('Register request received:', { email, password });
 
+    let user = await User.findOne({ email });
     if (user) {
+      console.log('User already exists:', email);
       return res.status(400).json({ message: 'User already exists' });
     }
 
@@ -30,8 +32,10 @@ router.post('/register', async (req, res) => {
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     });
 
+    console.log('User registered successfully:', { id: user._id, email: user.email });
     res.json({ user: { id: user._id, email: user.email } });
   } catch (err) {
+    console.error('Error during registration:', err);
     res.status(500).json({ message: 'Server error' });
   }
 });
