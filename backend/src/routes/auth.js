@@ -82,12 +82,8 @@ router.post('/logout', (req, res) => {
 });
 
 router.get('/me', auth, async (req, res) => {
-  try {
-    const user = await User.findById(req.userId).select('-password');
-    res.json({ user: { id: user._id, email: user.email } });
-  } catch (err) {
-    res.status(500).json({ message: 'Server error' });
-  }
+console.log('Request received:', req.user);
+  
 });
 
 export default router;
