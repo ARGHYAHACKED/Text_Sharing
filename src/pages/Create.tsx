@@ -13,7 +13,11 @@ export default function Create() {
     setIsLoading(true);
 
     try {
-      const response = await api.post('/api/texts', { content });
+      const response = await api.post('/api/texts', { content },
+                                     {
+          withCredentials: true, // Send cookies with the request
+        }
+                                     );
       toast.success('Text created successfully');
       navigate(`/view/${response.data.slug}`);
     } catch (error) {
